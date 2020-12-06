@@ -23,14 +23,15 @@ int Point::getColumn() const{
 }
 
 istream &operator>>(istream &is, Point &p){
-	char temp;
-	is >> temp >> p.column;
-	while(temp > 'J' || temp < 'A' ||  p.column < 0 || p.column > 9){
+	char i, j;
+	is >> i >> j;
+	while(i > 'J' || i < 'A' ||  j < '0' || j > '9'){
 		cout << "Invalid position\n"
 			<< "row: A to J\n"
 			<< "column: 0 to 9\n";
-		is >> temp >> p.column;
+		is >> i >> j;
 	}	
-	p.row = int(temp - 'A');
+	p.row = int(i - 'A');
+	p.column = int(j - '0');
 	return is;
 }
