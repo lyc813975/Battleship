@@ -20,13 +20,12 @@ void Board::init(){
 		memset(board[i], 'O', kBoardWidth);
 }
 
-bool Board::setChar(Point p, char c){
-	// The change position need to be in board
-	if(!isInside(p))
-		return false;
+char& Board::operator[](Point p){
+	return board[p.getRow()][p.getColumn()];
+}
 
-	board[p.getRow()][p.getColumn()] = c;
-	return true;
+char Board::operator[](Point p) const{
+	return board[p.getRow()][p.getColumn()];
 }
 
 bool Board::setShip(Ship ship){

@@ -8,7 +8,8 @@ class Board{
 	public:
 		Board();
 		void init();
-		bool setChar(Point, char);
+		char& operator[](Point);
+		char operator[](Point) const;
 		bool setShip(Ship);
 		void displayBoard();
 		~Board();

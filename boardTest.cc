@@ -8,12 +8,12 @@ int main(){
 	board.displayBoard();
 	std::cout << '\n';
 
-	board.setChar(Point('A', 0), 'A');
-	board.setChar(Point('B', 0), 'B');
-	board.setChar(Point('C', 0), 'C');
-	board.setChar(Point('D', 0), 'S');
-	board.setChar(Point('E', 0), 'P');
-	board.setChar(Point('F', 0), 'X');
+	board[Point('A', 0)] = 'A';
+	board[Point('B', 0)] = 'B';
+	board[Point('C', 0)] = 'C';
+	board[Point('D', 0)] = 'S';
+	board[Point('E', 0)] = 'P';
+	board[Point('F', 0)] = 'X';
 	board.displayBoard();
 	std::cout << '\n';
 
