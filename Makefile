@@ -1,20 +1,36 @@
-boardTest.out: test.o Board.o AnsiPrint.o Ship.o Point.o
-	g++ -o boardTest.out Board.o AnsiPrint.o test.o Point.o Ship.o
+TARGET = board
+SOURCES = AnsiPrint Board Ship Point
+TEST = boardTest
 
-test.o: test.cc Board.h Point.h Ship.h
-	g++ -c test.cc
+# about compiler and .obj file directory #
+CXX = g++
+CXXFLAGS = -g -Wall
+O_DIR = O_
 
-Ship.o: Ship.cc Ship.h Point.h
-	g++ -c Ship.cc
+# some names #
+SRCS = ${SOURCES:%=%.cc}
+OBJS = ${SRCS:%.cc=$(O_DIR)/%.o}
+TESTSRC = ${TEST:%=%.cc}
+TESTOBJ = ${TESTSRC:%.cc=$(O_DIR)/%.o}
 
-Board.o: Board.cc Board.h AnsiPrint.h Ship.h Point.h
-	g++ -c Board.cc
+# commnad #
+$(TARGET): $(O_DIR) $(OBJS) $(TESTOBJ)
+	$(CXX) -o $@ $(CXXFLAGS) $(OBJS) $(TESTOBJ)
 
-AnsiPrint.o: AnsiPrint.cc AnsiPrint.h
-	g++ -c AnsiPrint.cc
-Point.o: Point.cc Point.h
-	g++ -c Point.cc
+$(O_DIR):
+	mkdir $@
+
+$(O_DIR)/%.o: %.cc
+	$(CXX) $(CXXFLAGS) -o $@ -c $<
 
 clean:
-	rm -f *.o *.out
+	rm -f $(TARGET) $(OBJS) $(TESTOBJ)
+	rmdir $(O_DIR)
+
+# dependence relation #
+test.o: Board.h Point.h Ship.h
+Ship.o: Ship.h Point.h
+Board.o: Board.h AnsiPrint.h Ship.h Point.h
+AnsiPrint.o: AnsiPrint.h
+Point.o: Point.h
 
