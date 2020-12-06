@@ -1,4 +1,4 @@
-TARGET = board
+TARGET = boardTest
 SOURCES = AnsiPrint Board Ship Point
 TEST = boardTest
 
