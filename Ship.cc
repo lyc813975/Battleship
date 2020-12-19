@@ -1,4 +1,5 @@
 #include "Ship.h"
+#include <iostream>
 
 /*
  *
@@ -29,6 +30,7 @@ Ship::Ship(char t):type(t){
 			lenght = 2;
 			break;
 	}
+	hp = lenght;
 }
 
 void Ship::setDirection(Direction d){
@@ -39,6 +41,15 @@ void Ship::setLocation(Point p){
 	this->location = p;
 }
 
+void Ship::setHp(int h){
+	this->hp = h;
+}
+
+void Ship::decreaseHp(){
+	if(hp > 0)
+		--hp;
+}
+
 char Ship::getType() const{
 	return this->type;
 }
@@ -47,10 +58,42 @@ int Ship::getLenght() const{
 	return this->lenght;
 }
 
+int Ship::getHp() const{
+	return this->hp;
+}
+
 Direction Ship::getDirection() const{
 	return this->direction;
 }
 
 Point Ship::getLocation() const{
 	return this->location;
+}
+
+std::ostream &operator<<(std::ostream &os, Ship s){
+	switch(type){
+		case 'A':
+			os << "Aircraft: ";
+			break;
+		case 'B':
+			os << "Battleship: ";
+			break;
+		case 'C':
+			os << "Cruiser: ";
+			break;
+		case 'S':
+			os << "Submarine: ";
+			break;
+		case 'P':
+			os << "Patorl: ";
+			break;
+	}
+
+	int i;
+	for(i = 0; i < hp; ++i)
+		os << '*';
+	for(;i < lenght; ++i)
+		os << '-';
+
+	return os;
 }
