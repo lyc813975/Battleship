@@ -11,7 +11,9 @@ class Board{
 		char& operator[](Point);
 		char operator[](Point) const;
 		bool setShip(Ship);
-		void displayBoard();
+		void showPoint(Point);
+		void showAll();
+		void display();
 		~Board();
 
 	private:
@@ -20,6 +22,7 @@ class Board{
 		const static int kBoardHeight = 10;
 		const static int kBoardWidth = 10;
 		char **board;
+		bool **hide;
 };
 
 #endif // BOARD_H_
