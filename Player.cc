@@ -1,5 +1,5 @@
 #include "Player.h"
-#include "board.h"
+#include "Board.h"
 #include "Ship.h"
 #include <iostream>
 using namespace std;
