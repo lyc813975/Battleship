@@ -16,22 +16,22 @@ void Player::setShip(){
 	int setShip = 0;
 	bool set[kShipQuantity] = {false};
 	while(setShip < kShipQuantity){
-    	d = -1, s = -1;
+    	d = -1;
 		cout << "Choose one ship to set.\n";
-		while(s > 5 || s <= 0){
+		do{
 			for(int i = 0; i < kShipQuantity; ++i)
 				if(!set[i])
 					cout << i+1 << ") " << shipType[i] << '\n';
 			cin >> s;
-		}
+		}while(s > 5 || s <= 0 || set[s-1]);
 		myBoard.display();
 		cout << "Choose one point.\n";
 		cin >> p;
-		while(d > 2 || s <= 0){
-			cout << "Choose direction:\n"
-				<< "1) Down, 2) Right\n";
+		cout << "Choose direction:\n"
+		do{
+			cout << "1) Down, 2) Right\n";
 			cin >> d;
-		}
+		}while(d > 2 || s <= 0);
 
 		ship[s-1].setLocation(p);
 		ship[s-1].setDirection(Direction(d-1));
@@ -46,17 +46,20 @@ void Player::setShip(){
 }
 
 void Player::attack(){
-	bool hit = true;
-	while(hit){
+	bool hit;
+	do{
 		Point p;
 		opponentBoard.display();
 		cout << "Choose one point to attack\n";
 		cin >> p;
-		/*
-		 * if(miss)
-		 *     hit = false;
-		 */
-	}
+		opponentBoard.showPoint(p);
+		if(opponentBoard[p] == 'O'){
+			opponentBoard[p] = 'X';
+			hit = false;
+		}else{
+			hit = true;
+		}
+	}while(hit);
 }
 
 Player::~Player(){
