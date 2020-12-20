@@ -1,8 +1,6 @@
 #ifndef POINT_H_
 #define POINT_H_
 
-#include <iostream>
-
 class Point{
 	public:
 		Point();
@@ -12,7 +10,6 @@ class Point{
 	private:
 		int row;
 		int column;
-	friend std::istream &operator>>(std::istream &, Point &);
 };
 
 #endif // POINT_H_

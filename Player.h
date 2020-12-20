@@ -1,20 +1,20 @@
 #ifndef PLAYER_H_
 #define PLAYER_H_
 
-class Board;
-class Ship;
+#include "Board.h"
+#include "Ship.h"
 
 class Player{
 	public:
-		Player();
+		Player(Board &);
 		void setShip();
 		void attack();
-		~Player;
+		~Player();
 	private:
-		static const char (*shipType)[5] = {"Aircraft", "BattleShip", "Cruiser", "Submarine", "Patorl"}
 		static const int kShipQuantity = 5;
+		char **shipType;
 		Board myBoard;
-		Board opponentBoard;
+		Board &opponentBoard;
 		Ship **ship;
 };
 

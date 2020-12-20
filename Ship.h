@@ -1,10 +1,10 @@
 #ifndef SHIP_H_
 #define SHIP_H_
 
+#include "Point.h"
 #include <iostream>
 
 enum Direction {Down = 0, Right};
-class Point;
 
 class Ship{
 	public:
@@ -23,7 +23,7 @@ class Ship{
 	private:
 		const char type;
 		int lenght;
-		int hp
+		int hp;
 		Point location;
 		Direction direction;
 };

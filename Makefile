@@ -1,6 +1,6 @@
-TARGET = boardTest
-SOURCES = AnsiPrint Board Ship Point
-TEST = boardTest
+TARGET = playerTest
+SOURCES = AnsiPrint Board Ship Point Player
+TEST = playerTest
 
 # about compiler and .obj file directory #
 CXX = g++
@@ -28,9 +28,9 @@ clean:
 	rmdir $(O_DIR)
 
 # dependence relation #
-test.o: Board.h Point.h Ship.h
 Ship.o: Ship.h Point.h
 Board.o: Board.h AnsiPrint.h Ship.h Point.h
 AnsiPrint.o: AnsiPrint.h
 Point.o: Point.h
+Player.o: Player.h Board.h Ship.h
 

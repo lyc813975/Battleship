@@ -1,4 +1,5 @@
 #include "Ship.h"
+#include "Point.h"
 #include <iostream>
 
 /*
@@ -71,7 +72,7 @@ Point Ship::getLocation() const{
 }
 
 std::ostream &operator<<(std::ostream &os, Ship s){
-	switch(type){
+	switch(s.type){
 		case 'A':
 			os << "Aircraft: ";
 			break;
@@ -90,9 +91,9 @@ std::ostream &operator<<(std::ostream &os, Ship s){
 	}
 
 	int i;
-	for(i = 0; i < hp; ++i)
+	for(i = 0; i < s.hp; ++i)
 		os << '*';
-	for(;i < lenght; ++i)
+	for(;i < s.lenght; ++i)
 		os << '-';
 
 	return os;
