@@ -6,7 +6,7 @@
 #include <cstring>
 using namespace std;
 
-Player::Player(Board &b): opponentBoard(b){
+Player::Player(){
 	shipType = new char *[kShipQuantity];
 	for(int i = 0; i < kShipQuantity; ++i)
 		shipType[i] = new char [16];
@@ -19,6 +19,14 @@ Player::Player(Board &b): opponentBoard(b){
 	for(int i = 0; i < kShipQuantity; ++i)
 		ship[i] = new Ship(shipType[i][0]);
 	myBoard.showAll();
+}
+
+Board *Player::getAddressofBoard(){
+	return &myBoard;
+}
+
+void Player::setOpponentBoard(Board *b){
+	opponentBoard = b;
 }
 
 void Player::setShip(){
@@ -67,15 +75,15 @@ void Player::attack(){
 	char row;
 	int column;
 	do{
-		opponentBoard.display();
+		opponentBoard->display();
 		cout << "Choose one point to attack\n";
 		do{
 	    	cout <<	"[A to J] [0 to 9]\n";
 			cin >> row >> column;
 		}while(row < 'A' || row > 'J' || column < 0 || column > 9);
-		opponentBoard.showPoint(row-'A', column);
-		if(opponentBoard.getChar(row-'A', column) == 'O'){
-			opponentBoard.setChar(row-'A', column, 'X');
+		opponentBoard->showPoint(row-'A', column);
+		if(opponentBoard->getChar(row-'A', column) == 'O'){
+			opponentBoard->setChar(row-'A', column, 'X');
 			hit = false;
 			cout << "miss...\n";
 		}else{

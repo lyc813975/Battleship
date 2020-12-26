@@ -6,7 +6,9 @@
 
 class Player{
 	public:
-		Player(Board &);
+		Player();
+		Board *getAddressofBoard();
+		void setOpponentBoard(Board *);
 		void setShip();
 		void attack();
 		~Player();
@@ -14,7 +16,7 @@ class Player{
 		static const int kShipQuantity = 5;
 		char **shipType;
 		Board myBoard;
-		Board &opponentBoard;
+		Board *opponentBoard;
 		Ship **ship;
 };
 
