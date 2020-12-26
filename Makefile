@@ -1,5 +1,5 @@
 TARGET = playerTest
-SOURCES = AnsiPrint Board Ship Point Player
+SOURCES = AnsiPrint Board Ship Point Player AIPlayer
 TEST = playerTest
 
 # about compiler and .obj file directory #
@@ -33,4 +33,4 @@ Board.o: Board.h AnsiPrint.h Ship.h Point.h
 AnsiPrint.o: AnsiPrint.h
 Point.o: Point.h
 Player.o: Player.h Board.h Ship.h Point.h
-
+AIPlayer.o: AIPlayer.h Board.h Ship.h Point.h
