@@ -10,21 +10,23 @@ class Ship{
 	public:
 		Ship();
 		Ship(char);
-		void setLocation(Point);
+		void setLocation(char, int);
 		void setDirection(Direction);
 		void setHp(int);
 		void decreaseHp();
 		char getType() const;
 		int getLenght() const;
 		int getHp() const;
-		Point getLocation() const;
+		int getLocationI() const;
+		int getLocationJ() const;
 		Direction getDirection() const;
 		friend std::ostream &operator<<(std::ostream &, Ship);
 	private:
 		const char type;
 		int lenght;
 		int hp;
-		Point location;
+		int location_i;
+		int location_j;
 		Direction direction;
 };
 

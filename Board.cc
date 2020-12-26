@@ -25,25 +25,24 @@ void Board::init(){
 		}
 }
 
-char& Board::operator[](Point p){
-	return board[p.getRow()][p.getColumn()];
+char Board::getChar(int i, int j) const{
+	return board[i][j];
 }
 
-char Board::operator[](Point p) const{
-	return board[p.getRow()][p.getColumn()];
+void Board::setChar(int i, int j, char c){
+	 board[i][j] = c;
 }
 
 bool Board::setShip(Ship ship){
 	// The start position of ship need to be in boad
-	Point str = ship.getLocation();
-	if(!isInside(str))
+	int str_i = ship.getLocationI();
+	int str_j = ship.getLocationJ();
+	if(!isInside(str_i, str_j))
 		return false;
 
-	int str_i = str.getRow(), str_j = str.getColumn();
-	
 	if(ship.getDirection() == Down){
 		// The end position of ship need, too
-		if(!isInside(str_i+ship.getLenght(), str_j))
+		if(!isInside(str_i+ship.getLenght()-1, str_j))
 			return false;
 		// Betweem start and end, Three need to be blank without other ships
 		for(int i = str_i; i < str_i+ship.getLenght(); ++i)
@@ -54,7 +53,7 @@ bool Board::setShip(Ship ship){
 			board[i][str_j] = ship.getType();
 	}else{
 		// The end position of ship need, too
-		if(!isInside(str_i, str_j+ship.getLenght()))
+		if(!isInside(str_i, str_j+ship.getLenght()-1))
 			return false;
 		// Betweem start and end, Three need to be blank without other ships
 		for(int j = str_j; j < str_j+ship.getLenght(); ++j)
@@ -67,8 +66,8 @@ bool Board::setShip(Ship ship){
 	return true;
 }
 
-void Board::showPoint(Point p){
-	hide[p.getRow()][p.getColumn()] = false;
+void Board::showPoint(int i, int j){
+	hide[i][j] = false;
 }
 
 void Board::showAll(){
@@ -89,23 +88,15 @@ void Board::display(){
 				switch(board[i][j]){
 					// Aircraft carrier
 					case 'A':
-						font = green;
-						break;
-						// Battleship
+					// Battleship
 					case 'B':
-						font = yellow;
-						break;
-						// Cruiser
+					// Cruiser
 					case 'C':
-						font = pink;
-						break;
-						// Submarine
+					// Submarine
 					case 'S':
-						font = cyan;
-						break;
-						// Patorl boat
+					// Patorl boat
 					case 'P':
-						font = nochange;
+						font = green;
 						break;
 						// missed
 					case 'X':

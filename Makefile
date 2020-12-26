@@ -32,5 +32,5 @@ Ship.o: Ship.h Point.h
 Board.o: Board.h AnsiPrint.h Ship.h Point.h
 AnsiPrint.o: AnsiPrint.h
 Point.o: Point.h
-Player.o: Player.h Board.h Ship.h
+Player.o: Player.h Board.h Ship.h Point.h
 

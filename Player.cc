@@ -3,11 +3,18 @@
 #include "Ship.h"
 #include "Point.h"
 #include <iostream>
+#include <cstring>
 using namespace std;
 
 Player::Player(Board &b): opponentBoard(b){
-	shipType = new char *[kShipQuantity]{
-		"Aircraft", "BattleShip", "Crusier", "Submarine", "Patrol"};
+	shipType = new char *[kShipQuantity];
+	for(int i = 0; i < kShipQuantity; ++i)
+		shipType[i] = new char [16];
+	strcpy(shipType[0],	"Aircraft");
+	strcpy(shipType[1],	"Battleship");
+	strcpy(shipType[2],	"Crusier");
+	strcpy(shipType[3],	"Submarine");
+	strcpy(shipType[4],	"Patorl");
 	ship = new Ship *[kShipQuantity];
 	for(int i = 0; i < kShipQuantity; ++i)
 		ship[i] = new Ship(shipType[i][0]);
@@ -43,7 +50,7 @@ void Player::setShip(){
 			cin >> d;
 		}while(d > 2 || s <= 0);
 
-		ship[s-1]->setLocation(Point(row, column));
+		ship[s-1]->setLocation(row, column);
 		ship[s-1]->setDirection(Direction(d-1));
 		if(myBoard.setShip(*ship[s-1])){
 			set[s-1] = true;
@@ -56,7 +63,6 @@ void Player::setShip(){
 }
 
 void Player::attack(){
-	Point p;
 	bool hit;
 	char row;
 	int column;
@@ -67,15 +73,14 @@ void Player::attack(){
 	    	cout <<	"[A to J] [0 to 9]\n";
 			cin >> row >> column;
 		}while(row < 'A' || row > 'J' || column < 0 || column > 9);
-		p = Point(row, column);
-		opponentBoard.showPoint(p);
-		if(opponentBoard[p] == 'O'){
-			opponentBoard[p] = 'X';
+		opponentBoard.showPoint(row-'A', column);
+		if(opponentBoard.getChar(row-'A', column) == 'O'){
+			opponentBoard.setChar(row-'A', column, 'X');
 			hit = false;
-			cout << "hit!!!\n";
+			cout << "miss...\n";
 		}else{
 			hit = true;
-			cout << "miss...\n";
+			cout << "hit!!!\n";
 		}
 	}while(hit);
 }

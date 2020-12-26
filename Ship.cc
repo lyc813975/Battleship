@@ -38,8 +38,9 @@ void Ship::setDirection(Direction d){
 	this->direction = d;
 }
 
-void Ship::setLocation(Point p){
-	this->location = p;
+void Ship::setLocation(char i, int j){
+	this->location_i = i - 'A';
+	this->location_j = j;
 }
 
 void Ship::setHp(int h){
@@ -67,8 +68,12 @@ Direction Ship::getDirection() const{
 	return this->direction;
 }
 
-Point Ship::getLocation() const{
-	return this->location;
+int Ship::getLocationI() const{
+	return this->location_i;
+}
+
+int Ship::getLocationJ() const{
+	return this->location_j;
 }
 
 std::ostream &operator<<(std::ostream &os, Ship s){

@@ -7,19 +7,19 @@
 int main(){
 	Board board;
 	Ship a('A');
-	a.setLocation(Point('A', 1));
+	a.setLocation('A', 1);
 	a.setDirection(Down);
 	Ship b('B');
-	b.setLocation(Point('B', 1));
+	b.setLocation('B', 1);
 	b.setDirection(Down);
 	Ship c('C');
-	c.setLocation(Point('C', 1));
+	c.setLocation('C', 1);
 	c.setDirection(Down);
 	Ship s('S');
-	s.setLocation(Point('S', 1));
+	s.setLocation('S', 1);
 	s.setDirection(Down);
 	Ship p('P');
-	p.setLocation(Point('P', 1));
+	p.setLocation('P', 1);
 	p.setDirection(Down);
 	board.setShip(a);
 	board.setShip(b);
