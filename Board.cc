@@ -78,6 +78,7 @@ void Board::showAll(){
 
 void Board::display(){
 	for(int i = 0; i < kBoardHeight; ++i){
+		cout << '\t';
 		cout << setw(3) << char('A'+i);
 		for(int j = 0; j < kBoardWidth; ++j){
 			AnsiPrint(' ', nochange, blue, false, false);
@@ -96,6 +97,7 @@ void Board::display(){
 		}
 		cout << '\n';
 	}
+	cout << '\t';
 	cout << "  ";
 	for(int i = 0; i < 10; ++i)
 		cout << setw(3) << i;

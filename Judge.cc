@@ -9,12 +9,15 @@ Judge::Judge(): player1("you"), player2("CPU"){
 
 void Judge::start(){
 	player1.openBoard();
-	player2.openBoard();
+	bool cheat;
+	cout << "open CPU's board?\n"
+		<< "0: no, 1: yes\n";
+	cin >> cheat;
+	if(cheat)
+		player2.openBoard();
 	player1.setShip();
 	player1.displayBoard();
 	player2.setShip();
-	player1.setOpponentBoard(player2.getAddressOfBoard());
-	player2.setOpponentBoard(player1.getAddressOfBoard());
 }
 
 void Judge::oneGame(){

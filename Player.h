@@ -8,8 +8,6 @@
 class Player{
 	public:
 		Player(const char *);
-		Board *getAddressOfBoard();
-		void setOpponentBoard(Board *);
 		void openBoard();
 		void displayBoard();
 		bool displayShip();

@@ -76,6 +76,7 @@ int Ship::getLocationJ() const{
 }
 
 std::ostream &operator<<(std::ostream &os, Ship s){
+	os << '\t';
 	switch(s.type){
 		case 'A':
 			os << "Aircraft: ";

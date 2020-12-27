@@ -24,14 +24,6 @@ Player::Player(const char *playerName){
 		ship[i] = new Ship(shipType[i][0]);
 }
 
-Board *Player::getAddressOfBoard(){
-	return &myBoard;
-}
-
-void Player::setOpponentBoard(Board *b){
-	opponentBoard = b;
-}
-
 void Player::openBoard(){
 	myBoard.showAll();
 }
