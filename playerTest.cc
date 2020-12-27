@@ -6,8 +6,8 @@
 #include <iostream>
 
 int main(){
-	Player player;
-	AIPlayer AIplayer;
+	Player player("me");
+	AIPlayer AIplayer("CPU");
 	AIplayer.setShip();
 	player.setShip();
 	player.setOpponentBoard(AIplayer.getAddressofBoard());

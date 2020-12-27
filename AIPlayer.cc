@@ -8,7 +8,7 @@
 #include <cstring>
 using namespace std;
 
-AIPlayer::AIPlayer(): Player(){
+AIPlayer::AIPlayer(const char *playerName): Player(playerName){
 }
 
 void AIPlayer::setShip(){

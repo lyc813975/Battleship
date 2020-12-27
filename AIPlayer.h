@@ -7,7 +7,7 @@
 
 class AIPlayer: public Player{
 	public:
-		AIPlayer();
+		AIPlayer(const char *);
 		void setShip();
 		void attack();
 		~AIPlayer();

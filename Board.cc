@@ -3,6 +3,7 @@
 #include "Board.h"
 #include "AnsiPrint.h"
 #include <iostream>
+#include <cctype>
 #include <iomanip>
 using namespace std;
 
@@ -84,31 +85,16 @@ void Board::display(){
 			AnsiPrint(' ', nochange, blue, false, false);
 			if(hide[i][j]){
 				AnsiPrint('?', red, blue, false, false);
+			}else if(board[i][j] == 'X'){
+				font = red;
+			}else if(board[i][j] == 'O'){
+				font = nochange;
+			}else if(isupper(board[i][j])){
+				font = green;
 			}else{
-				switch(board[i][j]){
-					// Aircraft carrier
-					case 'A':
-					// Battleship
-					case 'B':
-					// Cruiser
-					case 'C':
-					// Submarine
-					case 'S':
-					// Patorl boat
-					case 'P':
-						font = green;
-						break;
-						// missed
-					case 'X':
-						font = red;
-						break;
-						// ...
-					default:
-						font = black;
-						break;
-				}
-				AnsiPrint(board[i][j], font, blue, false, false);
+				font = black;
 			}
+			AnsiPrint(board[i][j], font, blue, false, false);
 			AnsiPrint(' ', nochange, blue, false, false);
 		}
 		cout << '\n';
