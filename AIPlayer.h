@@ -1,23 +1,17 @@
-#ifndef AIPAYER_H_
+#ifndef AIPLAYER_H_
 #define AIPLAYER_H_
 
+#include "Player.h"
 #include "Board.h"
 #include "Ship.h"
 
-class AIPlayer{
+class AIPlayer: public Player{
 	public:
 		AIPlayer();
-		Board *getAddressofBoard();
-		void setOpponentBoard(Board *);
-		void setShip();
-		void attack();
-		~AIPlayer();
+		virtual void setShip();
+		virtual void attack();
+		virtual ~AIPlayer();
 	private:
-		static const int kShipQuantity = 5;
-		char **shipType;
-		Board myBoard;
-		Board *opponentBoard;
-		Ship **ship;
 };
 
 #endif // AIPLAYER_H_

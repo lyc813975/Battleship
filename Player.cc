@@ -7,10 +7,10 @@
 using namespace std;
 
 Player::Player(){
-	shipType = new char *[kShipQuantity];
+	shipType = new char* [5];
 	for(int i = 0; i < kShipQuantity; ++i)
 		shipType[i] = new char [16];
-	strcpy(shipType[0],	"Aircraft");
+	strcpy(shipType[0], "Aircraft");
 	strcpy(shipType[1],	"Battleship");
 	strcpy(shipType[2],	"Crusier");
 	strcpy(shipType[3],	"Submarine");
@@ -36,7 +36,8 @@ void Player::setShip(){
 	bool set[kShipQuantity] = {false};
 	while(setShip < kShipQuantity){
 		myBoard.display();
-		/* input flush or something mey need 
+		/*
+		 * input flush or something mey need 
 		 * when input error occur
 		 */
 
@@ -87,8 +88,24 @@ void Player::attack(){
 			hit = false;
 			cout << "miss...\n";
 		}else{
+			switch(opponentBoard->getChar(row-'A', column)){
+				case 'A':
+					cout << "hit " << shipType[0] << "!!!\n";
+					break;
+				case 'B':
+					cout << "hit " << shipType[1] << "!!!\n";
+					break;
+				case 'C':
+					cout << "hit " << shipType[2] << "!!!\n";
+					break;
+				case 'S':
+					cout << "hit " << shipType[3] << "!!!\n";
+					break;
+				case 'P':
+					cout << "hit " << shipType[4] << "!!!\n";
+					break;
+			}
 			hit = true;
-			cout << "hit!!!\n";
 		}
 	}while(hit);
 }

@@ -9,10 +9,10 @@ class Player{
 		Player();
 		Board *getAddressofBoard();
 		void setOpponentBoard(Board *);
-		void setShip();
-		void attack();
-		~Player();
-	private:
+		virtual void setShip();
+		virtual void attack();
+		virtual ~Player();
+	protected:
 		static const int kShipQuantity = 5;
 		char **shipType;
 		Board myBoard;

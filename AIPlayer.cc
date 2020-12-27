@@ -1,4 +1,5 @@
 #include "AIPlayer.h"
+#include "Player.h"
 #include "Board.h"
 #include "Ship.h"
 #include "Point.h"
@@ -7,26 +8,7 @@
 #include <cstring>
 using namespace std;
 
-AIPlayer::AIPlayer(){
-	shipType = new char *[kShipQuantity];
-	for(int i = 0; i < kShipQuantity; ++i)
-		shipType[i] = new char [16];
-	strcpy(shipType[0],	"Aircraft");
-	strcpy(shipType[1],	"Battleship");
-	strcpy(shipType[2],	"Crusier");
-	strcpy(shipType[3],	"Submarine");
-	strcpy(shipType[4],	"Patorl");
-	ship = new Ship *[kShipQuantity];
-	for(int i = 0; i < kShipQuantity; ++i)
-		ship[i] = new Ship(shipType[i][0]);
-}
-
-Board *AIPlayer::getAddressofBoard(){
-	return &myBoard;
-}
-
-void AIPlayer::setOpponentBoard(Board *b){
-	opponentBoard = b;
+AIPlayer::AIPlayer(): Player(){
 }
 
 void AIPlayer::setShip(){
@@ -60,7 +42,4 @@ void AIPlayer::attack(){
 }
 
 AIPlayer::~AIPlayer(){
-	for(int i = 0; i < kShipQuantity; ++i)
-		delete ship[i];
-	delete ship;
 }
