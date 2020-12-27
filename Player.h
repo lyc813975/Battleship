@@ -9,9 +9,9 @@ class Player{
 		Player();
 		Board *getAddressofBoard();
 		void setOpponentBoard(Board *);
-		virtual void setShip();
-		virtual void attack();
-		virtual ~Player();
+		void setShip();
+		void attack();
+		~Player();
 	protected:
 		static const int kShipQuantity = 5;
 		char **shipType;

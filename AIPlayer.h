@@ -8,9 +8,9 @@
 class AIPlayer: public Player{
 	public:
 		AIPlayer();
-		virtual void setShip();
-		virtual void attack();
-		virtual ~AIPlayer();
+		void setShip();
+		void attack();
+		~AIPlayer();
 	private:
 };
 
