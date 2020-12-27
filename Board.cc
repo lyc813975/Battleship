@@ -77,7 +77,6 @@ void Board::showAll(){
 }
 
 void Board::display(){
-	color font;
 	for(int i = 0; i < kBoardHeight; ++i){
 		cout << setw(3) << char('A'+i);
 		for(int j = 0; j < kBoardWidth; ++j){
@@ -85,15 +84,14 @@ void Board::display(){
 			if(hide[i][j]){
 				AnsiPrint('?', red, blue, false, false);
 			}else if(board[i][j] == 'X'){
-				font = red;
+				AnsiPrint(board[i][j], red, blue, false, false);
 			}else if(board[i][j] == 'O'){
-				font = nochange;
+				AnsiPrint(board[i][j], nochange, blue, false, false);
 			}else if(isupper(board[i][j])){
-				font = green;
+				AnsiPrint(board[i][j], green, blue, false, false);
 			}else{
-				font = black;
+				AnsiPrint(board[i][j], black, blue, false, false);
 			}
-			AnsiPrint(board[i][j], font, blue, false, false);
 			AnsiPrint(' ', nochange, blue, false, false);
 		}
 		cout << '\n';

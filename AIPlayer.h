@@ -4,12 +4,13 @@
 #include "Player.h"
 #include "Board.h"
 #include "Ship.h"
+#include <utility>
 
 class AIPlayer: public Player{
 	public:
 		AIPlayer(const char *);
 		void setShip();
-		void attack();
+		std::pair<char, int> attack();
 		~AIPlayer();
 	private:
 };

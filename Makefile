@@ -1,6 +1,6 @@
-TARGET = playerTest
-SOURCES = AnsiPrint Board Ship Player AIPlayer
-TEST = playerTest
+TARGET = Game
+SOURCES = AnsiPrint Board Ship Player AIPlayer Judge
+TEST = Game 
 
 # about compiler and .obj file directory #
 CXX = g++
@@ -32,4 +32,5 @@ Ship.o: Ship.h
 Board.o: Board.h AnsiPrint.h Ship.h
 AnsiPrint.o: AnsiPrint.h
 Player.o: Player.h Board.h Ship.h
-AIPlayer.o: AIPlayer.h Board.h Ship.h
+AIPlayer.o: AIPlayer.h Player.h Board.h Ship.h
+Judge.o: Judge.h AIPlayer.h Player.h 

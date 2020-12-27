@@ -3,6 +3,8 @@
 #include "Ship.h"
 #include <iostream>
 #include <cstring>
+#include <utility>
+
 using namespace std;
 
 Player::Player(const char *playerName){
@@ -20,7 +22,6 @@ Player::Player(const char *playerName){
 	ship = new Ship *[kShipQuantity];
 	for(int i = 0; i < kShipQuantity; ++i)
 		ship[i] = new Ship(shipType[i][0]);
-	myBoard.showAll();
 }
 
 Board *Player::getAddressOfBoard(){
@@ -29,6 +30,10 @@ Board *Player::getAddressOfBoard(){
 
 void Player::setOpponentBoard(Board *b){
 	opponentBoard = b;
+}
+
+void Player::openBoard(){
+	myBoard.showAll();
 }
 
 void Player::displayBoard(){
@@ -88,42 +93,42 @@ void Player::setShip(){
 	}
 }
 
-void Player::attack(){
-	bool hit;
-	char row;
-	int column;
-	char temp;
+pair<char, int>  Player::attack(){
+	pair<char, int> p;
+	cout << "Choose one point to attack\n";
 	do{
-		opponentBoard->display();
-		cout << "Choose one point to attack\n";
-		do{
-	    	cout <<	"[A to J] [0 to 9]\n";
-			cin >> row >> column;
-		}while(row < 'A' || row > 'J' || column < 0 || column > 9);
-		opponentBoard->showPoint(row-'A', column);
-		temp = opponentBoard->getChar(row-'A', column);
-		if(temp == 'O'){
-			opponentBoard->setChar(row-'A', column, 'X');
-			hit = false;
-			cout << "miss...\n";
-		}else{
-			switch(temp){
-				case 'A':
-				case 'B':
-				case 'C':
-					cout << "hit " << shipType[temp-'A'] << "!!!\n";
-					break;
-				case 'S':
-					cout << "hit " << shipType[3] << "!!!\n";
-					break;
-				case 'P':
-					cout << "hit " << shipType[4] << "!!!\n";
-					break;
-			}
-			opponentBoard->setChar(row-'A', column, temp-'A'+'a');
-			hit = true;
-		}
-	}while(hit);
+		cout <<	"[A to J] [0 to 9]\n";
+		cin >> p.first >> p.second;
+	}while(p.first < 'A' || p.first > 'J' || p.second < 0 || p.second > 9);
+	return p;
+}
+
+bool Player::beAttcked(pair<char, int> p){
+	myBoard.showPoint(p.first-'A', p.second);
+	char s = myBoard.getChar(p.first-'A', p.second);
+	if(s == 'O'){
+		myBoard.setChar(p.first-'A', p.second, 'X');
+		cout << "miss...\n";
+		return false;
+	}
+	switch(s){
+		case 'A':
+		case 'B':
+		case 'C':
+			cout << name << "'s " << shipType[s-'A'] << "was hit!!!\n";
+			ship[s-'A']->decreaseHp();
+			break;
+		case 'S':
+			cout << name << "'s " << shipType[3] << "was hit!!!\n";
+			ship[3]->decreaseHp();
+			break;
+		case 'P':
+			cout << name << "'s " << shipType[4] << "was hit!!!\n";
+			ship[4]->decreaseHp();
+			break;
+	}
+	myBoard.setChar(p.first-'A', p.second, s-'A'+'a');
+	return true;
 }
 
 Player::~Player(){

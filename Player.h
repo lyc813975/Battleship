@@ -3,16 +3,19 @@
 
 #include "Board.h"
 #include "Ship.h"
+#include <utility>
 
 class Player{
 	public:
 		Player(const char *);
 		Board *getAddressOfBoard();
 		void setOpponentBoard(Board *);
+		void openBoard();
 		void displayBoard();
 		bool displayShip();
 		void setShip();
-		void attack();
+		std::pair<char, int> attack();
+		bool beAttcked(std::pair<char, int>);
 		~Player();
 	protected:
 		static const int kShipQuantity = 5;
