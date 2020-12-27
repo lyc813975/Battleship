@@ -2,7 +2,6 @@
 #define BOARD_H_
 
 class Ship;
-class Point;
 
 class Board{
 	public:
@@ -17,7 +16,6 @@ class Board{
 		~Board();
 
 	private:
-		bool isInside(Point);
 		bool isInside(int, int);
 		const static int kBoardHeight = 10;
 		const static int kBoardWidth = 10;

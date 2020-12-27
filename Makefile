@@ -1,5 +1,5 @@
 TARGET = playerTest
-SOURCES = AnsiPrint Board Ship Point Player AIPlayer
+SOURCES = AnsiPrint Board Ship Player AIPlayer
 TEST = playerTest
 
 # about compiler and .obj file directory #
@@ -28,9 +28,8 @@ clean:
 	rmdir $(O_DIR)
 
 # dependence relation #
-Ship.o: Ship.h Point.h
-Board.o: Board.h AnsiPrint.h Ship.h Point.h
+Ship.o: Ship.h
+Board.o: Board.h AnsiPrint.h Ship.h
 AnsiPrint.o: AnsiPrint.h
-Point.o: Point.h
-Player.o: Player.h Board.h Ship.h Point.h
-AIPlayer.o: AIPlayer.h Board.h Ship.h Point.h
+Player.o: Player.h Board.h Ship.h
+AIPlayer.o: AIPlayer.h Board.h Ship.h

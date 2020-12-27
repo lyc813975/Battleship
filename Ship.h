@@ -1,7 +1,6 @@
 #ifndef SHIP_H_
 #define SHIP_H_
 
-#include "Point.h"
 #include <iostream>
 
 enum Direction {Down = 0, Right};

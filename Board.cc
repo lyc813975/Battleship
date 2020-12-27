@@ -1,4 +1,3 @@
-#include "Point.h"
 #include "Ship.h"
 #include "Board.h"
 #include "AnsiPrint.h"
@@ -112,14 +111,6 @@ Board::~Board(){
 	}
 	delete [] board;
 	delete [] hide;
-}
-
-bool Board::isInside(Point p){
-	int i = p.getRow();
-	int j = p.getColumn();
-	if(i >= 0 && j >= 0 && i < kBoardHeight && j < kBoardWidth)
-		return true;
-	return false;
 }
 
 bool Board::isInside(int i, int j){

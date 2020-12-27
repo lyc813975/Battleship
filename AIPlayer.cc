@@ -2,7 +2,6 @@
 #include "Player.h"
 #include "Board.h"
 #include "Ship.h"
-#include "Point.h"
 #include <iostream>
 #include <cstdlib>
 #include <cstring>

@@ -10,8 +10,8 @@ int main(){
 	AIPlayer AIplayer("CPU");
 	AIplayer.setShip();
 	player.setShip();
-	player.setOpponentBoard(AIplayer.getAddressofBoard());
-	AIplayer.setOpponentBoard(player.getAddressofBoard());
+	player.setOpponentBoard(AIplayer.getAddressOfBoard());
+	AIplayer.setOpponentBoard(player.getAddressOfBoard());
 	AIplayer.attack();
 	player.attack();
 }

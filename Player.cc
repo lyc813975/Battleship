@@ -23,7 +23,7 @@ Player::Player(const char *playerName){
 	myBoard.showAll();
 }
 
-Board *Player::getAddressofBoard(){
+Board *Player::getAddressOfBoard(){
 	return &myBoard;
 }
 
