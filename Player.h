@@ -7,7 +7,7 @@
 class Player{
 	public:
 		Player(const char *);
-		Board *getAddressofBoard();
+		Board *getAddressOfBoard();
 		void setOpponentBoard(Board *);
 		void displayBoard();
 		bool displayShip();

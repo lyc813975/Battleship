@@ -1,7 +1,6 @@
 #include "Player.h"
 #include "Board.h"
 #include "Ship.h"
-#include "Point.h"
 #include <iostream>
 #include <cstring>
 using namespace std;

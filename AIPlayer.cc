@@ -27,15 +27,18 @@ void AIPlayer::setShip(){
 
 void AIPlayer::attack(){
 	bool hit;
+	char temp;
 	int row, column;
 	do{
 		row = rand()%10;
 		column = rand()%10;
 		opponentBoard->showPoint(row, column);
-		if(opponentBoard->getChar(row, column) == 'O'){
+		temp = opponentBoard->getChar(row, column);
+		if(temp == 'O'){
 			opponentBoard->setChar(row, column, 'X');
 			hit = false;
 		}else{
+			opponentBoard->setChar(row-'A', column, temp-'A'+'a');
 			hit = true;
 		}
 	}while(hit);

@@ -14,4 +14,4 @@ class AIPlayer: public Player{
 	private:
 };
 
-#endif // AIPLAYER_H_
+#endif // AIPLAYER_H_ 
