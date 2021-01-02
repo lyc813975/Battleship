@@ -30,6 +30,7 @@ pair<char, int> AIPlayer::attack(){
 	pair<char, int> p;
 		p.first = rand()%10 + 'A'; 
 		p.second  = rand()%10;
+		cout << "CPU Attack You " << p.first << p.second << endl ;
 		return p;
 }
 
