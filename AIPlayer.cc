@@ -28,10 +28,13 @@ void AIPlayer::setShip(){
 
 pair<char, int> AIPlayer::attack(){
 	pair<char, int> p;
-		p.first = rand()%10 + 'A'; 
+	do{
+		p.first = rand()%10 + 'A';
 		p.second  = rand()%10;
-		cout << "CPU Attack You " << p.first << p.second << endl ;
-		return p;
+	}while(repeat[p.first-'A'][p.second]);
+	cout << "CPU Attack You " << p.first << ' ' << p.second << endl;
+	repeat[p.first-'A'][p.second] = true;
+	return p;
 }
 
 AIPlayer::~AIPlayer(){

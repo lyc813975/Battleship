@@ -19,9 +19,16 @@ Player::Player(const char *playerName){
 	strcpy(shipType[2],	"Crusier");
 	strcpy(shipType[3],	"Submarine");
 	strcpy(shipType[4],	"Patorl");
+	
 	ship = new Ship *[kShipQuantity];
 	for(int i = 0; i < kShipQuantity; ++i)
 		ship[i] = new Ship(shipType[i][0]);
+
+	repeat = new bool *[10];
+	for(int i = 0; i < 10; ++i){
+		repeat[i] = new bool [10];
+		memset(repeat[i], false, 10);
+	}
 }
 
 void Player::openBoard(){
@@ -91,7 +98,11 @@ pair<char, int>  Player::attack(){
 	do{
 		cout <<	"[A to J] [0 to 9]\n";
 		cin >> p.first >> p.second;
-	}while(p.first < 'A' || p.first > 'J' || p.second < 0 || p.second > 9);
+		if(repeat[p.first-'A'][p.second])
+			cout << "This point has been attacked\n";
+	}while(p.first < 'A' || p.first > 'J' || p.second < 0 || p.second > 9 ||
+			repeat[p.first-'A'][p.second]);
+	repeat[p.first-'A'][p.second] = true;
 	return p;
 }
 
@@ -126,6 +137,10 @@ bool Player::beAttcked(pair<char, int> p){
 Player::~Player(){
 	for(int i = 0; i < kShipQuantity; ++i)
 		delete ship[i];
+	for(int i = 0; i < 10; ++i)
+		delete repeat[i];
+
 	delete ship;
 	delete name;
+	delete repeat;
 }
