@@ -51,8 +51,8 @@ bool Player::displayShip(){
 }
 
 void Player::setShip(){
-	char row;
-    int	d, s, column;
+	char row = '\0';
+	int	d = -1 , s = -1, column = -1;
 	int setShip = 0;
 	bool set[kShipQuantity] = {false};
 	while(setShip < kShipQuantity){
@@ -64,6 +64,10 @@ void Player::setShip(){
 
 		cout << "Choose one ship to set.\n";
 		do{
+			if(cin.fail()){
+				cin.clear();
+				cin.ignore();
+			}
 			for(int i = 0; i < kShipQuantity; ++i)
 				if(!set[i])
 					cout << i+1 << ") " << shipType[i] << '\n';
@@ -71,14 +75,24 @@ void Player::setShip(){
 		}while(s > 5 || s <= 0 || set[s-1]);
 		cout << "Choose one point.\n";
 		do{
-	    	cout <<	"[A to J] [0 to 9]\n";
+			if(cin.fail()){
+				cin.clear();
+				cin.ignore();
+			}
+			cout <<	"[A to J] [0 to 9]\n";
+			// column input fail, column will become 0
+			// maybe change 0~9 to 1~10
 			cin >> row >> column;
 		}while(row < 'A' || row > 'J' || column < 0 || column > 9);
 		cout << "Choose direction:\n";
 		do{
+			if(cin.fail()){
+				cin.clear();
+				cin.ignore();
+			}
 			cout << "1) Down, 2) Right\n";
 			cin >> d;
-		}while(d > 2 || s <= 0);
+		}while(d > 2 || d <= 0);
 
 		ship[s-1]->setLocation(row, column);
 		ship[s-1]->setDirection(Direction(d-1));
@@ -96,6 +110,10 @@ pair<char, int>  Player::attack(){
 	pair<char, int> p;
 	cout << "Choose one point to attack\n";
 	do{
+		if(cin.fail()){
+			cin.clear();
+			cin.ignore();
+		}
 		cout <<	"[A to J] [0 to 9]\n";
 		cin >> p.first >> p.second;
 		if(repeat[p.first-'A'][p.second])

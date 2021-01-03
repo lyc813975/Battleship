@@ -32,7 +32,7 @@ pair<char, int> AIPlayer::attack(){
 		p.first = rand()%10 + 'A';
 		p.second  = rand()%10;
 	}while(repeat[p.first-'A'][p.second]);
-	cout << "CPU Attack You " << p.first << ' ' << p.second << endl;
+	cout << "CPU Attack " << p.first << ' ' << p.second << endl;
 	repeat[p.first-'A'][p.second] = true;
 	return p;
 }
