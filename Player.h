@@ -21,7 +21,6 @@ class Player{
 		char *name;
 		bool **repeat;
 		Board myBoard;
-		Board *opponentBoard;
 		Ship **ship;
 };
 

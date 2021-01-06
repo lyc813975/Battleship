@@ -1,5 +1,4 @@
 #include "Judge.h"
-
 int main(){
 	Judge judge("YOU", "CPU");
 	judge.start();

@@ -40,7 +40,7 @@ void AIPlayer::setShip(){
 	int setShip = 0;
 	while(setShip < kShipQuantity){
 		row = rand()%kBoardHeight + 'A';
-		column = rand()%kBoardWidth;
+		column = rand()%kBoardWidth + 1;
 		direction = rand()%2;
 		ship[setShip]->setLocation(row, column);
 		ship[setShip]->setDirection(Direction(direction));
@@ -75,14 +75,14 @@ void AIPlayer::determine(char s, pair<char, int> p){
 AIPlayer::~AIPlayer(){
 	for(int i = 0; i < kShipQuantity; ++i){
 		for(int j = 0; j < kBoardHeight; ++j)
-			delete solution[i][j];
-		delete solution[i];
+			delete [] solution[i][j];
+		delete [] solution[i];
 	}
-	delete solution;
+	delete [] solution;
 
 	for(int i = 0; i < kBoardHeight; ++i)
-		delete sumSol[i];
-	delete sumSol;
+		delete [] sumSol[i];
+	delete [] sumSol;
 }
 
 void AIPlayer::count(int ship, int length, int i, int j){

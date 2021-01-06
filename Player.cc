@@ -45,7 +45,7 @@ bool Player::displayShip(){
 	cout << name << endl;
 	for(int i = 0; i < kShipQuantity; ++i){
 		totalHp += ship[i]->getHp();
-		cout << *ship[i] << endl;
+		ship[i]->display();
 	}
 	return totalHp == 0;
 }
@@ -57,6 +57,7 @@ void Player::setShip(){
 	bool set[kShipQuantity] = {false};
 	while(setShip < kShipQuantity){
 		this->displayBoard();
+		// may add reset ship
 		cout << "Choose one ship to set.\n";
 		do{
 			if(cin.fail()){
@@ -68,17 +69,17 @@ void Player::setShip(){
 					cout << i+1 << ") " << shipType[i] << '\n';
 			cin >> s;
 		}while(s > 5 || s <= 0 || set[s-1]);
+		
 		cout << "Choose one point.\n";
 		do{
 			if(cin.fail()){
 				cin.clear();
 				cin.ignore();
 			}
-			cout <<	"[A to J] [0 to 9]\n";
-			// column input fail, column will become 0
-			// maybe change 0~9 to 1~10
+			cout <<	"[A to J] [1 to 10]\n";
 			cin >> row >> column;
-		}while(row < 'A' || row > 'J' || column < 0 || column > 9);
+		}while(row < 'A' || row > 'J' || column < 1 || column > 10);
+
 		cout << "Choose direction:\n";
 		do{
 			if(cin.fail()){
@@ -109,50 +110,45 @@ pair<char, int>  Player::attack(){
 			cin.clear();
 			cin.ignore();
 		}
-		cout <<	"[A to J] [0 to 9]\n";
+		cout <<	"[A to J] [1 to 10]\n";
 		cin >> p.first >> p.second;
-		if(repeat[p.first-'A'][p.second])
+		if(repeat[p.first-'A'][p.second-1])
 			cout << "This point has been attacked\n";
-	}while(p.first < 'A' || p.first > 'J' || p.second < 0 || p.second > 9 ||
-			repeat[p.first-'A'][p.second]);
-	repeat[p.first-'A'][p.second] = true;
+	}while(p.first < 'A' || p.first > 'J' || p.second < 1 || p.second > 10 ||
+			repeat[p.first-'A'][p.second-1]);
+	repeat[p.first-'A'][p.second-1] = true;
 	return p;
 }
 
 char Player::beAttcked(pair<char, int> p){
-	myBoard.showPoint(p.first-'A', p.second);
-	char s = myBoard.getChar(p.first-'A', p.second);
+	myBoard.showPoint(p.first, p.second);
+	char s = myBoard.getChar(p.first, p.second);
 	if(s == 'O'){
-		myBoard.setChar(p.first-'A', p.second, 'X');
+		myBoard.setChar(p.first, p.second, 'X');
+		cout << "miss...\n";
 	}else{
-		switch(s){
-			case 'A':
-			case 'B':
-			case 'C':
-				cout << name << "'s " << shipType[s-'A'] << "was hit!!!\n";
-				ship[s-'A']->decreaseHp();
+		cout << name << "'s ";
+		for(int i = 0; i < kShipQuantity; ++i)
+			if(s == shipType[i][0]){
+				cout << shipType[i];
 				break;
-			case 'S':
-				cout << name << "'s " << shipType[3] << "was hit!!!\n";
-				ship[3]->decreaseHp();
-				break;
-			case 'P':
-				cout << name << "'s " << shipType[4] << "was hit!!!\n";
-				ship[4]->decreaseHp();
-				break;
-		}
-		myBoard.setChar(p.first-'A', p.second, s-'A'+'a');
+			}
+		cout << " was hit!!!\n";
+		myBoard.setChar(p.first, p.second, s-'A'+'a');
 	}
 	return s;
 }
 
 Player::~Player(){
-	for(int i = 0; i < kShipQuantity; ++i)
-		delete ship[i];
+	for(int i = 0; i < kShipQuantity; ++i){
+		delete [] shipType[i];
+		delete [] ship[i];
+	}
 	for(int i = 0; i < 10; ++i)
-		delete repeat[i];
+		delete [] repeat[i];
 
-	delete ship;
-	delete name;
-	delete repeat;
+	delete [] shipType;
+	delete [] ship;
+	delete [] name;
+	delete [] repeat;
 }

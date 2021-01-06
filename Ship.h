@@ -11,21 +11,20 @@ class Ship{
 		Ship(char);
 		void setLocation(char, int);
 		void setDirection(Direction);
-		void setHp(int);
 		void decreaseHp();
 		char getType() const;
 		int getLength() const;
 		int getHp() const;
-		int getLocationI() const;
-		int getLocationJ() const;
+		char getRow() const;
+		int getColumn() const;
 		Direction getDirection() const;
-		friend std::ostream &operator<<(std::ostream &, Ship);
+		void display() const;
 	private:
 		const char type;
 		int length;
 		int hp;
-		int location_i;
-		int location_j;
+		char row;
+		int column;
 		Direction direction;
 };
 

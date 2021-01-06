@@ -30,8 +30,10 @@ void Judge::oneGame(){
 	bool end = false;
 	pair<char, int> position;
 	char ship;
-	while(true){
-		while(!end){
+	while(!end){
+		// player1's turn
+		ship = '\0';
+		 while(!end && ship != 'O'){
 			player2.displayBoard();
 			position = player1.attack();
 			cout << player1Name << " attack "<< position.first << ' ' << position.second << '\n';
@@ -39,17 +41,16 @@ void Judge::oneGame(){
 			ship = player2.beAttcked(position);
 			// return if the sum of the hp of the ships is equal to 0
 			end = player2.displayShip();
-			if(ship == 'O'){
-				cout << "miss...\n";
-				break;
-			}
 		}
 		if(end){
-			cout << player1Name <<  " win\n";//player1 win
+			cout << player1Name <<  " win\n";
 			break;
 		}
-		cout << "==============================================================\n";
-		while(!end){
+		cout << "\t====================================\n";
+
+		// player2's turn
+		ship = '\0';
+		while(!end && ship != 'O'){
 			player1.displayBoard();
 			position = player2.attack();
 			cout << player2Name << " attack "<< position.first << ' ' << position.second << '\n';
@@ -57,25 +58,19 @@ void Judge::oneGame(){
 			ship = player1.beAttcked(position);
 			// return if the sum of the hp of the ships is equal to 0
 			end = player1.displayShip();
+			// AI determine the conversion of the possibility
 			if(!end)
 				player2.determine(ship, position);
-
-			if(ship == 'O'){
-				cout << "miss...\n";
-				break;
-				// AI determine the conversion of the possibility
-			}
-			// AI determine the conversion of the possibility
 		}
 		if(end){
-			cout << player2Name << "  win\n";//player2 win
+			cout << player2Name << "  win\n";
 			break;
 		}
-		cout << "==============================================================\n";
+		cout << "\t====================================\n";
 	}
 }
 
 Judge::~Judge(){
-	delete player1Name;
-	delete player2Name;
+	delete [] player1Name;
+	delete [] player2Name;
 }

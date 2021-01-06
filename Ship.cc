@@ -1,5 +1,6 @@
 #include "Ship.h"
 #include <iostream>
+using namespace std;
 
 /*
  *
@@ -38,12 +39,8 @@ void Ship::setDirection(Direction d){
 }
 
 void Ship::setLocation(char i, int j){
-	this->location_i = i - 'A';
-	this->location_j = j;
-}
-
-void Ship::setHp(int h){
-	this->hp = h;
+	this->row = i;
+	this->column = j;
 }
 
 void Ship::decreaseHp(){
@@ -67,39 +64,38 @@ Direction Ship::getDirection() const{
 	return this->direction;
 }
 
-int Ship::getLocationI() const{
-	return this->location_i;
+char Ship::getRow() const{
+	return this->row;
 }
 
-int Ship::getLocationJ() const{
-	return this->location_j;
+int Ship::getColumn() const{
+	return this->column;
 }
 
-std::ostream &operator<<(std::ostream &os, Ship s){
-	os << '\t';
-	switch(s.type){
+void Ship::display() const{
+	cout << '\t';
+	switch(type){
 		case 'A':
-			os << "Aircraft: ";
+			cout << "Aircraft: ";
 			break;
 		case 'B':
-			os << "Battleship: ";
+			cout << "Battleship: ";
 			break;
 		case 'C':
-			os << "Cruiser: ";
+			cout << "Cruiser: ";
 			break;
 		case 'S':
-			os << "Submarine: ";
+			cout << "Submarine: ";
 			break;
 		case 'P':
-			os << "Patorl: ";
+			cout << "Patorl: ";
 			break;
 	}
 
 	int i;
-	for(i = 0; i < s.hp; ++i)
-		os << '*';
-	for(;i < s.length; ++i)
-		os << '-';
-
-	return os;
+	for(i = 0; i < hp; ++i)
+		cout << '*';
+	for(;i < length; ++i)
+		cout << '-';
+	cout << '\n';
 }

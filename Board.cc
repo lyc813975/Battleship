@@ -25,18 +25,18 @@ void Board::init(){
 		}
 }
 
-char Board::getChar(int i, int j) const{
-	return board[i][j];
+char Board::getChar(int i, char j) const{
+	return board[i-kRowStart][j-kColumnStart];
 }
 
-void Board::setChar(int i, int j, char c){
-	 board[i][j] = c;
+void Board::setChar(int i, char j, char c){
+	 board[i-kRowStart][j-kColumnStart] = c;
 }
 
 bool Board::setShip(Ship ship){
 	// The start position of ship need to be in boad
-	int str_i = ship.getLocationI();
-	int str_j = ship.getLocationJ();
+	int str_i = int(ship.getRow() - kRowStart);
+	int str_j = ship.getColumn() - kColumnStart;
 	if(!isInside(str_i, str_j))
 		return false;
 
@@ -66,8 +66,8 @@ bool Board::setShip(Ship ship){
 	return true;
 }
 
-void Board::showPoint(int i, int j){
-	hide[i][j] = false;
+void Board::showPoint(int i, char j){
+	hide[i-kRowStart][j-kColumnStart] = false;
 }
 
 void Board::showAll(){
@@ -79,7 +79,7 @@ void Board::showAll(){
 void Board::display(){
 	for(int i = 0; i < kBoardHeight; ++i){
 		cout << '\t';
-		cout << setw(3) << char('A'+i);
+		cout << setw(3) << char(kRowStart+i);
 		for(int j = 0; j < kBoardWidth; ++j){
 			AnsiPrint(' ', nochange, blue, false, false);
 			if(hide[i][j]){
@@ -100,17 +100,21 @@ void Board::display(){
 	cout << '\t';
 	cout << "  ";
 	for(int i = 0; i < 10; ++i)
-		cout << setw(3) << i;
+		cout << setw(3) << i+kColumnStart;
 	cout << "\n";
 }
 
 Board::~Board(){
 	for(int i = 0; i < kBoardHeight; ++i){
-		delete [] hide[i];
-		delete [] board[i];
+		// only if AI win 
+		// Error:free(): invalid next size(fast)
+		// why????
+	//	delete hide[i];
+	//	delete board[i];
 	}
-	delete [] board;
-	delete [] hide;
+	delete board;
+	delete hide;
+	
 }
 
 bool Board::isInside(int i, int j){
