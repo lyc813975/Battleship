@@ -17,20 +17,20 @@ Ship::Ship():type(' '){
 Ship::Ship(char t):type(t){
 	switch(type){
 		case 'A':
-			lenght = 5;
+			length = 5;
 			break;
 		case 'B':
-			lenght = 4;
+			length = 4;
 			break;
 		case 'C':
-			lenght = 3;
+			length = 3;
 			break;
 		case 'S':
 		case 'P':
-			lenght = 2;
+			length = 2;
 			break;
 	}
-	hp = lenght;
+	hp = length;
 }
 
 void Ship::setDirection(Direction d){
@@ -55,8 +55,8 @@ char Ship::getType() const{
 	return this->type;
 }
 
-int Ship::getLenght() const{
-	return this->lenght;
+int Ship::getLength() const{
+	return this->length;
 }
 
 int Ship::getHp() const{
@@ -98,7 +98,7 @@ std::ostream &operator<<(std::ostream &os, Ship s){
 	int i;
 	for(i = 0; i < s.hp; ++i)
 		os << '*';
-	for(;i < s.lenght; ++i)
+	for(;i < s.length; ++i)
 		os << '-';
 
 	return os;

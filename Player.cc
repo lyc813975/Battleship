@@ -15,10 +15,10 @@ Player::Player(const char *playerName){
 	for(int i = 0; i < kShipQuantity; ++i)
 		shipType[i] = new char [16];
 	strcpy(shipType[0], "Aircraft");
-	strcpy(shipType[1],	"Battleship");
-	strcpy(shipType[2],	"Crusier");
-	strcpy(shipType[3],	"Submarine");
-	strcpy(shipType[4],	"Patorl");
+	strcpy(shipType[1], "Battleship");
+	strcpy(shipType[2], "Crusier");
+	strcpy(shipType[3], "Submarine");
+	strcpy(shipType[4], "Patorl");
 	
 	ship = new Ship *[kShipQuantity];
 	for(int i = 0; i < kShipQuantity; ++i)
@@ -57,11 +57,6 @@ void Player::setShip(){
 	bool set[kShipQuantity] = {false};
 	while(setShip < kShipQuantity){
 		this->displayBoard();
-		/*
-		 * input flush or something mey need 
-		 * when input error occur
-		 */
-
 		cout << "Choose one ship to set.\n";
 		do{
 			if(cin.fail()){
@@ -124,32 +119,31 @@ pair<char, int>  Player::attack(){
 	return p;
 }
 
-bool Player::beAttcked(pair<char, int> p){
+char Player::beAttcked(pair<char, int> p){
 	myBoard.showPoint(p.first-'A', p.second);
 	char s = myBoard.getChar(p.first-'A', p.second);
 	if(s == 'O'){
 		myBoard.setChar(p.first-'A', p.second, 'X');
-		cout << "miss...\n";
-		return false;
+	}else{
+		switch(s){
+			case 'A':
+			case 'B':
+			case 'C':
+				cout << name << "'s " << shipType[s-'A'] << "was hit!!!\n";
+				ship[s-'A']->decreaseHp();
+				break;
+			case 'S':
+				cout << name << "'s " << shipType[3] << "was hit!!!\n";
+				ship[3]->decreaseHp();
+				break;
+			case 'P':
+				cout << name << "'s " << shipType[4] << "was hit!!!\n";
+				ship[4]->decreaseHp();
+				break;
+		}
+		myBoard.setChar(p.first-'A', p.second, s-'A'+'a');
 	}
-	switch(s){
-		case 'A':
-		case 'B':
-		case 'C':
-			cout << name << "'s " << shipType[s-'A'] << "was hit!!!\n";
-			ship[s-'A']->decreaseHp();
-			break;
-		case 'S':
-			cout << name << "'s " << shipType[3] << "was hit!!!\n";
-			ship[3]->decreaseHp();
-			break;
-		case 'P':
-			cout << name << "'s " << shipType[4] << "was hit!!!\n";
-			ship[4]->decreaseHp();
-			break;
-	}
-	myBoard.setChar(p.first-'A', p.second, s-'A'+'a');
-	return true;
+	return s;
 }
 
 Player::~Player(){

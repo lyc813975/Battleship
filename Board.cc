@@ -42,25 +42,25 @@ bool Board::setShip(Ship ship){
 
 	if(ship.getDirection() == Down){
 		// The end position of ship need, too
-		if(!isInside(str_i+ship.getLenght()-1, str_j))
+		if(!isInside(str_i+ship.getLength()-1, str_j))
 			return false;
 		// Betweem start and end, Three need to be blank without other ships
-		for(int i = str_i; i < str_i+ship.getLenght(); ++i)
+		for(int i = str_i; i < str_i+ship.getLength(); ++i)
 			if(board[i][str_j] != 'O')
 				return false;
 
-		for(int i = str_i; i < str_i+ship.getLenght(); ++i)
+		for(int i = str_i; i < str_i+ship.getLength(); ++i)
 			board[i][str_j] = ship.getType();
 	}else{
 		// The end position of ship need, too
-		if(!isInside(str_i, str_j+ship.getLenght()-1))
+		if(!isInside(str_i, str_j+ship.getLength()-1))
 			return false;
 		// Betweem start and end, Three need to be blank without other ships
-		for(int j = str_j; j < str_j+ship.getLenght(); ++j)
+		for(int j = str_j; j < str_j+ship.getLength(); ++j)
 			if(board[str_i][j] != 'O')
 				return false;
 
-		for(int j = str_j; j < str_j+ship.getLenght(); ++j)
+		for(int j = str_j; j < str_j+ship.getLength(); ++j)
 			board[str_i][j] = ship.getType();
 	}
 	return true;

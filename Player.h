@@ -13,7 +13,7 @@ class Player{
 		bool displayShip();
 		void setShip();
 		std::pair<char, int> attack();
-		bool beAttcked(std::pair<char, int>);
+		char beAttcked(std::pair<char, int>);
 		~Player();
 	protected:
 		static const int kShipQuantity = 5;

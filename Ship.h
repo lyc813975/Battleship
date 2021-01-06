@@ -14,7 +14,7 @@ class Ship{
 		void setHp(int);
 		void decreaseHp();
 		char getType() const;
-		int getLenght() const;
+		int getLength() const;
 		int getHp() const;
 		int getLocationI() const;
 		int getLocationJ() const;
@@ -22,7 +22,7 @@ class Ship{
 		friend std::ostream &operator<<(std::ostream &, Ship);
 	private:
 		const char type;
-		int lenght;
+		int length;
 		int hp;
 		int location_i;
 		int location_j;

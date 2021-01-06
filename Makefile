@@ -34,3 +34,4 @@ AnsiPrint.o: AnsiPrint.h
 Player.o: Player.h Board.h Ship.h
 AIPlayer.o: AIPlayer.h Player.h Board.h Ship.h
 Judge.o: Judge.h AIPlayer.h Player.h 
+Game.o: Judge.h

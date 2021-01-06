@@ -5,11 +5,13 @@
 
 class Judge{
 	public:
-		Judge();
+		Judge(const char *, const char *);
 		void start();
 		void oneGame();
 		~Judge();
 	private:
+		char *player1Name;
+		char *player2Name;
 		Player player1;
 		AIPlayer player2;
 };
