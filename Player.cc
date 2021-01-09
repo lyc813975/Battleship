@@ -12,7 +12,7 @@ Player::Player(const char *playerName){
 	strcpy(name, playerName);
 
 	ship = new Ship *[kShipQuantity];
-	ship[0] = new Ship("Aircraft");
+	ship[0] = new Ship("Aircraft carrier");
 	ship[1] = new Ship("Battleship");
 	ship[2] = new Ship("Crusier");
 	ship[3] = new Ship("Submarine");
