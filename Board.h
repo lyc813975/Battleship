@@ -13,10 +13,10 @@ class Board{
 		void showPoint(int, char);
 		void showAll();
 		void display();
+		bool isInside(int, int);
 		~Board();
 
 	private:
-		bool isInside(int, int);
 		const static int kBoardHeight = 10;
 		const static int kBoardWidth = 10;
 		const static int kColumnStart = 1;
