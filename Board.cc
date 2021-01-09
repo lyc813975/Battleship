@@ -33,7 +33,7 @@ void Board::setChar(int i, char j, char c){
 	 board[i-kRowStart][j-kColumnStart] = c;
 }
 
-bool Board::setShip(Ship ship){
+bool Board::setShip(Ship &ship){
 	// The start position of ship need to be in boad
 	int str_i = int(ship.getRow() - kRowStart);
 	int str_j = ship.getColumn() - kColumnStart;
@@ -50,7 +50,7 @@ bool Board::setShip(Ship ship){
 				return false;
 
 		for(int i = str_i; i < str_i+ship.getLength(); ++i)
-			board[i][str_j] = ship.getType();
+			board[i][str_j] = ship.getType()[0];
 	}else{
 		// The end position of ship need, too
 		if(!isInside(str_i, str_j+ship.getLength()-1))
@@ -61,7 +61,7 @@ bool Board::setShip(Ship ship){
 				return false;
 
 		for(int j = str_j; j < str_j+ship.getLength(); ++j)
-			board[str_i][j] = ship.getType();
+			board[str_i][j] = ship.getType()[0];
 	}
 	return true;
 }

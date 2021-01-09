@@ -11,19 +11,13 @@ Player::Player(const char *playerName){
 	name = new char [strlen(playerName)+1];
 	strcpy(name, playerName);
 
-	shipType = new char* [kShipQuantity];
-	for(int i = 0; i < kShipQuantity; ++i)
-		shipType[i] = new char [16];
-	strcpy(shipType[0], "Aircraft");
-	strcpy(shipType[1], "Battleship");
-	strcpy(shipType[2], "Crusier");
-	strcpy(shipType[3], "Submarine");
-	strcpy(shipType[4], "Patorl");
-	
 	ship = new Ship *[kShipQuantity];
-	for(int i = 0; i < kShipQuantity; ++i)
-		ship[i] = new Ship(shipType[i][0]);
-
+	ship[0] = new Ship("Aircraft");
+	ship[1] = new Ship("Battleship");
+	ship[2] = new Ship("Crusier");
+	ship[3] = new Ship("Submarine");
+	ship[4] = new Ship("Patorl");
+	
 	repeat = new bool *[10];
 	for(int i = 0; i < 10; ++i){
 		repeat[i] = new bool [10];
@@ -66,7 +60,7 @@ void Player::setShip(){
 			}
 			for(int i = 0; i < kShipQuantity; ++i)
 				if(!set[i])
-					cout << i+1 << ") " << shipType[i] << '\n';
+					cout << i+1 << ") " << ship[i]->getType() << '\n';
 			cin >> s;
 		}while(s > 5 || s <= 0 || set[s-1]);
 		
@@ -95,9 +89,9 @@ void Player::setShip(){
 		if(myBoard.setShip(*ship[s-1])){
 			set[s-1] = true;
 			++setShip;
-			cout << shipType[s-1] << " success to set.\n";
+			cout << ship[s-1]->getType() << " success to set.\n";
 		}else{
-			cout << shipType[s-1] << " fail to set.\n";
+			cout << ship[s-1]->getType() << " fail to set.\n";
 		}
 	}
 }
@@ -141,13 +135,11 @@ char Player::beAttcked(pair<char, int> p){
 
 Player::~Player(){
 	for(int i = 0; i < kShipQuantity; ++i){
-		delete [] shipType[i];
 		delete [] ship[i];
 	}
 	for(int i = 0; i < 10; ++i)
 		delete [] repeat[i];
 
-	delete [] shipType;
 	delete [] ship;
 	delete [] name;
 	delete [] repeat;

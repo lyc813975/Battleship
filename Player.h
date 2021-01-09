@@ -17,7 +17,6 @@ class Player{
 		~Player();
 	protected:
 		static const int kShipQuantity = 5;
-		char **shipType;
 		char *name;
 		bool **repeat;
 		Board myBoard;

@@ -9,7 +9,7 @@ class Board{
 		void init();
 		char getChar(int, char) const;
 		void setChar(int, char, char);
-		bool setShip(Ship);
+		bool setShip(Ship &);
 		void showPoint(int, char);
 		void showAll();
 		void display();

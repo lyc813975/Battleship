@@ -1,7 +1,7 @@
 #include "Ship.h"
 #include <iostream>
+#include <cstring>
 using namespace std;
-
 /*
  *
  * A: Aircraft carrier holds 5 blocks
@@ -12,11 +12,11 @@ using namespace std;
  *
  */
 
-Ship::Ship():type(' '){
-}
+Ship::Ship(const char *t){
+	type = new char [strlen(t)+1];
+	strcpy(type, t);
 
-Ship::Ship(char t):type(t){
-	switch(type){
+	switch(type[0]){
 		case 'A':
 			length = 5;
 			break;
@@ -48,7 +48,7 @@ void Ship::decreaseHp(){
 		--hp;
 }
 
-char Ship::getType() const{
+char *Ship::getType() const{
 	return this->type;
 }
 
@@ -73,8 +73,8 @@ int Ship::getColumn() const{
 }
 
 void Ship::display() const{
-	cout << '\t';
-	switch(type){
+	cout << '\t' << type << ": ";
+	switch(type[0]){
 		case 'A':
 			cout << "Aircraft: ";
 			break;
@@ -98,4 +98,8 @@ void Ship::display() const{
 	for(;i < length; ++i)
 		cout << '-';
 	cout << '\n';
+}
+
+Ship::~Ship(){
+	delete [] type;
 }
