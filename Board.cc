@@ -3,6 +3,7 @@
 #include "AnsiPrint.h"
 #include <iostream>
 #include <cctype>
+#include <utility>
 #include <iomanip>
 using namespace std;
 
@@ -35,8 +36,8 @@ void Board::setChar(int i, char j, char c){
 
 bool Board::setShip(Ship &ship){
 	// The start position of ship need to be in boad
-	int str_i = int(ship.getRow() - kRowStart);
-	int str_j = ship.getColumn() - kColumnStart;
+	int str_i = int((ship.getLocation()).first - kRowStart);
+	int str_j = (ship.getLocation().second) - kColumnStart;
 	if(!isInside(str_i, str_j))
 		return false;
 
@@ -82,17 +83,21 @@ void Board::display(){
 		cout << setw(3) << char(kRowStart+i);
 		for(int j = 0; j < kBoardWidth; ++j){
 			AnsiPrint(' ', nochange, blue, false, false);
-			if(hide[i][j]){
-				AnsiPrint('?', red, blue, false, false);
-			}else if(board[i][j] == 'X'){
-				AnsiPrint(board[i][j], red, blue, false, false);
-			}else if(board[i][j] == 'O'){
-				AnsiPrint(board[i][j], nochange, blue, false, false);
-			}else if(isupper(board[i][j])){
-				AnsiPrint(board[i][j], green, blue, false, false);
-			}else{
+			// unknown and blank are white
+			if(hide[i][j])
+				AnsiPrint('?', white, blue, false, false);
+			else if(board[i][j] == 'O')
+				AnsiPrint(board[i][j], white, blue, false, false);
+			// hit is black
+			else if(islower(board[i][j]))
 				AnsiPrint(board[i][j], black, blue, false, false);
-			}
+			// miss is red
+			else if(board[i][j] == 'X')
+				AnsiPrint(board[i][j], red, blue, false, false);
+			// ship is green
+			else
+				AnsiPrint(board[i][j], green, blue, false, false);
+
 			AnsiPrint(' ', nochange, blue, false, false);
 		}
 		cout << '\n';
@@ -109,12 +114,11 @@ Board::~Board(){
 		// only if AI win 
 		// Error:free(): invalid next size(fast)
 		// why????
-	//	delete hide[i];
-	//	delete board[i];
+		//	delete hide[i];
+		//	delete board[i];
 	}
 	delete board;
 	delete hide;
-	
 }
 
 bool Board::isInside(int i, int j){

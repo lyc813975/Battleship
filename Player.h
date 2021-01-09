@@ -19,7 +19,7 @@ class Player{
 		static const int kShipQuantity = 5;
 		char *name;
 		bool **repeat;
-		Board myBoard;
+		Board board;
 		Ship **ship;
 };
 

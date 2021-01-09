@@ -2,10 +2,11 @@
 #include "Player.h"
 #include "Board.h"
 #include "Ship.h"
-#include <iostream>
-#include <cstdlib>
-#include <iomanip>
 #include <cstring>
+#include <cstdlib>
+#include <ctime>
+#include <iostream>
+#include <iomanip>
 #include <utility>
 using namespace std;
 
@@ -14,6 +15,8 @@ inline int AIPlayer::abs(int n){
 }
 
 AIPlayer::AIPlayer(const char *playerName): Player(playerName){
+	srand(time(NULL));
+
 	solution = new int **[kShipQuantity];
 	for(int i = 0; i < kShipQuantity; ++i){
 		solution[i] = new int* [kBoardHeight];
@@ -35,16 +38,16 @@ AIPlayer::AIPlayer(const char *playerName): Player(playerName){
 }
 
 void AIPlayer::setShip(){
-	char row;
-	int column, direction;
+	pair<char, int> position;
+	int direction;
 	int setShip = 0;
 	while(setShip < kShipQuantity){
-		row = rand()%kBoardHeight + 'A';
-		column = rand()%kBoardWidth + 1;
+		position.first = rand()%kBoardHeight + 'A';
+		position.second = rand()%kBoardWidth + 1;
 		direction = rand()%2;
-		ship[setShip]->setLocation(row, column);
+		ship[setShip]->setLocation(position);
 		ship[setShip]->setDirection(Direction(direction));
-		if(myBoard.setShip(*ship[setShip]))
+		if(board.setShip(*ship[setShip]))
 			++setShip;
 	}
 }
@@ -55,7 +58,7 @@ pair<char, int> AIPlayer::attack(){
 		for(int j = 0; j < kBoardWidth; ++j){
 			position -= sumSol[i][j];
 			if(position < 0){
-				pair<char, int> p(i+'A', j);
+				pair<char, int> p(i+'A', j+1);
 				return p;
 			}
 		}
@@ -65,10 +68,10 @@ pair<char, int> AIPlayer::attack(){
 
 void AIPlayer::determine(char s, pair<char, int> p){
 	for(int i = 0; i < kShipQuantity; ++i){
-		if(s == shipType[i][0])
-			hit(i, ship[i]->getLength(), p.first-'A', p.second);
+		if(s == ship[i]->getType()[0])
+			hit(i, ship[i]->getLength(), p.first-'A', p.second-1);
 		else
-			miss(i, ship[i]->getLength(), p.first-'A', p.second);
+			miss(i, ship[i]->getLength(), p.first-'A', p.second-1);
 	}
 }
 

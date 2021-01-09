@@ -26,12 +26,12 @@ Player::Player(const char *playerName){
 }
 
 void Player::openBoard(){
-	myBoard.showAll();
+	board.showAll();
 }
 
 void Player::displayBoard(){
 	cout << name << endl;
-	myBoard.display();
+	board.display();
 }
 
 bool Player::displayShip(){
@@ -45,8 +45,8 @@ bool Player::displayShip(){
 }
 
 void Player::setShip(){
-	char row = '\0';
-	int	d = -1 , s = -1, column = -1;
+	pair<char, int> position('\0', -1);
+	int	direction = -1 , s = -1;
 	int setShip = 0;
 	bool set[kShipQuantity] = {false};
 	while(setShip < kShipQuantity){
@@ -71,8 +71,9 @@ void Player::setShip(){
 				cin.ignore();
 			}
 			cout <<	"[A to J] [1 to 10]\n";
-			cin >> row >> column;
-		}while(row < 'A' || row > 'J' || column < 1 || column > 10);
+			cin >> position.first >> position.second;
+		}while(position.first < 'A' || position.first > 'J' ||
+				position.second < 1 || position.second > 10);
 
 		cout << "Choose direction:\n";
 		do{
@@ -81,12 +82,12 @@ void Player::setShip(){
 				cin.ignore();
 			}
 			cout << "1) Down, 2) Right\n";
-			cin >> d;
-		}while(d > 2 || d <= 0);
+			cin >> direction;
+		}while(direction > 2 || direction <= 0);
 
-		ship[s-1]->setLocation(row, column);
-		ship[s-1]->setDirection(Direction(d-1));
-		if(myBoard.setShip(*ship[s-1])){
+		ship[s-1]->setLocation(position);
+		ship[s-1]->setDirection(Direction(direction-1));
+		if(board.setShip(*ship[s-1])){
 			set[s-1] = true;
 			++setShip;
 			cout << ship[s-1]->getType() << " success to set.\n";
@@ -115,27 +116,28 @@ pair<char, int>  Player::attack(){
 }
 
 char Player::beAttcked(pair<char, int> p){
-	myBoard.showPoint(p.first, p.second);
-	char s = myBoard.getChar(p.first, p.second);
+	board.showPoint(p.first, p.second);
+	char s = board.getChar(p.first, p.second);
 	if(s == 'O'){
-		myBoard.setChar(p.first, p.second, 'X');
+		board.setChar(p.first, p.second, 'X');
 		cout << "miss...\n";
 	}else{
 		cout << name << "'s ";
 		for(int i = 0; i < kShipQuantity; ++i)
-			if(s == shipType[i][0]){
-				cout << shipType[i];
+			if(s == ship[i]->getType()[0]){
+				ship[i]->decreaseHp();
+				cout << ship[i]->getType();
 				break;
 			}
 		cout << " was hit!!!\n";
-		myBoard.setChar(p.first, p.second, s-'A'+'a');
+		board.setChar(p.first, p.second, s-'A'+'a');
 	}
 	return s;
 }
 
 Player::~Player(){
 	for(int i = 0; i < kShipQuantity; ++i){
-		delete [] ship[i];
+		delete ship[i];
 	}
 	for(int i = 0; i < 10; ++i)
 		delete [] repeat[i];

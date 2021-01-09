@@ -1,5 +1,6 @@
 #include "Ship.h"
 #include <iostream>
+#include <utility>
 #include <cstring>
 using namespace std;
 /*
@@ -38,9 +39,8 @@ void Ship::setDirection(Direction d){
 	this->direction = d;
 }
 
-void Ship::setLocation(char i, int j){
-	this->row = i;
-	this->column = j;
+void Ship::setLocation(pair<char, int> p){
+	this->location = p;
 }
 
 void Ship::decreaseHp(){
@@ -64,34 +64,13 @@ Direction Ship::getDirection() const{
 	return this->direction;
 }
 
-char Ship::getRow() const{
-	return this->row;
-}
 
-int Ship::getColumn() const{
-	return this->column;
+pair<char, int> Ship::getLocation() const{
+	return this-> location;
 }
 
 void Ship::display() const{
 	cout << '\t' << type << ": ";
-	switch(type[0]){
-		case 'A':
-			cout << "Aircraft: ";
-			break;
-		case 'B':
-			cout << "Battleship: ";
-			break;
-		case 'C':
-			cout << "Cruiser: ";
-			break;
-		case 'S':
-			cout << "Submarine: ";
-			break;
-		case 'P':
-			cout << "Patorl: ";
-			break;
-	}
-
 	int i;
 	for(i = 0; i < hp; ++i)
 		cout << '*';

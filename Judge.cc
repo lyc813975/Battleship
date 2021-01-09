@@ -33,7 +33,7 @@ void Judge::oneGame(){
 	while(!end){
 		// player1's turn
 		ship = '\0';
-		 while(!end && ship != 'O'){
+		while(!end && ship != 'O'){
 			player2.displayBoard();
 			position = player1.attack();
 			cout << player1Name << " attack "<< position.first << ' ' << position.second << '\n';
